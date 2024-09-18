@@ -10,6 +10,7 @@ let myFont;
 let img1;
 let scaleCounter = 0;
 let scaleDirection = 1;
+let userName = " ";
 let imgSizeFactor = 0.25; // Initial image size as a fraction of canvas height
 let string = 'Loading...';
 let currentCharacter = 0;
@@ -93,11 +94,15 @@ function preload() {
   redoButton= loadImage('returnButton.png');
 }
 
+function buttonClicked() {
+  storeUserName ();
+  sceneOne();
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight); // Make canvas fit the window screen
   button = createButton("Sign");
-  button.mouseClicked(sceneOne);
+  button.mouseClicked(buttonClicked);
   button.size(height * 0.2, height * 0.1); // Button size based on canvas height
   button.position(windowWidth /2, windowHeight * 0.75); // Button position based on canvas height
   button.style('background-color', color(100, 149, 237));
@@ -398,8 +403,17 @@ function sceneGraduation(){
   image(graduating, 0, 0, windowWidth, windowHeight);
   imageMode (CENTER);
   image (redoButton, windowWidth * .9, windowHeight * .1, 50, 50);
+  textFont(myFont);
+  fill(255);
+  textSize(height * 0.05); // Text size based on canvas height
+  text(`You're the best parent I could ask for, ${userName} !`, windowWidth /16, windowHeight * .9);
 }
 
+function storeUserName() { 
+  userName = input.value();
+  input.hide();
+  button.hide();
+}
 
 function eatButtonPressed() {
   isEating = true;
